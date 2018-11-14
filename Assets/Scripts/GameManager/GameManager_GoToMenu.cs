@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager_GoToMenu : MonoBehaviour {
 
@@ -32,6 +33,7 @@ public class GameManager_GoToMenu : MonoBehaviour {
     private void GoToMenu()
     {
         Debug.Log("Go To Menu");
+        SceneManager.LoadScene("MenuScene");
     }
 	#endregion
 }

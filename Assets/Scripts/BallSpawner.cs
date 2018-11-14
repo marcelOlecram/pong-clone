@@ -12,23 +12,21 @@ public class BallSpawner : MonoBehaviour {
     // private
     [SerializeField]
     private GameObject currentBall;
-    private float forceIncrement = 0.1f;
-	#endregion
-	
-	#region UnityMethods
-	// Use this for initialization
-	private void Start () {
+    private float forceIncrement = 0.1f;    
+    private GameLogicManager gameLogicManager;
+    #endregion
+
+    #region UnityMethods
+    private void OnEnable()
+    {
         SetInitialReferences();
-	}
-	
-	// Update is called once per frame
-	private void Update () {
-        if (currentBall != null)
-        {
-            return;
-        }
-        SpawnBall();
-	}
+        gameLogicManager.BallSpawnEvent += SpawnBall;
+    }
+
+    private void OnDisable()
+    {
+        gameLogicManager.BallSpawnEvent -= SpawnBall;
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -40,7 +38,8 @@ public class BallSpawner : MonoBehaviour {
     #region MyMethods
     private void SetInitialReferences()
     {
-        SpawnBall();
+        //SpawnBall();
+        gameLogicManager = GameObject.FindGameObjectWithTag("GameLogicManager").GetComponent<GameLogicManager>();
     }
 
     public void SpawnBall()
@@ -49,6 +48,8 @@ public class BallSpawner : MonoBehaviour {
         currentBall = Instantiate(ballPrefab, this.transform.position, Quaternion.identity);
         currentBall.GetComponent<Ball>().SetForceAndDirection(spawnForce, spawnDirection);
         spawnForce += forceIncrement;
+
+        gameLogicManager.SetBallInGame(currentBall);
     }
 
     private Vector2 GenRandomDirection()

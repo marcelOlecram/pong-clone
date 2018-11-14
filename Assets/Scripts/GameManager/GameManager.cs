@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     #region delegates
     public delegate void GameManagerEventHandler();
 
+    public event GameManagerEventHandler StartGameEvent;
     public event GameManagerEventHandler GoToMenuEvent;
     public event GameManagerEventHandler RestartLevelEvent;
     public event GameManagerEventHandler TogglePauseEvent;
@@ -21,9 +22,17 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region UnityMethods
-	#endregion
-	
-	#region MyMethods
+    #endregion
+
+    #region MyMethods
+    public void CallStartGameEvent()
+    {
+        Debug.Log("StartGameEvent");
+        if (StartGameEvent != null)
+        {
+            StartGameEvent();
+        }
+    }
     public void CallGoToMenuEvent() {
         if (GoToMenuEvent != null) {
             GoToMenuEvent();
