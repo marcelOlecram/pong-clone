@@ -26,6 +26,11 @@ public class GameManager_StartGame : MonoBehaviour {
     {
         gameManager.StartGameEvent -= gameLogicManager.CallBallSpawnEvent;
     }
+
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
     // Use this for initialization
     private void Start () {
         SetInitialReferences();

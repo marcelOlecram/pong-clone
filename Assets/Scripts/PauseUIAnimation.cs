@@ -28,7 +28,6 @@ public class PauseUIAnimation : MonoBehaviour {
 	
 	private void OnDisable () {
         //gameManager.TogglePauseEvent -= FadeOut;
-        FadeOut();
     }
 	#endregion
 	

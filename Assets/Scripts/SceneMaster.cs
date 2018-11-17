@@ -23,7 +23,13 @@ public class SceneMaster : MonoBehaviour {
 
     public void GoToScene()
     {
+        StartCoroutine(Wait());
         SceneManager.LoadScene(sceneToGo);
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.1f);
     }
 	#endregion
 }
