@@ -9,6 +9,7 @@ public class Scorer : MonoBehaviour {
     // public
     public Text scoreText;
     // private
+    private AudioSource audioSource;
     private GameLogicManager gameLogicManager;
     private GameObject collidedObject;
     private int score;
@@ -31,6 +32,7 @@ public class Scorer : MonoBehaviour {
     {
         collidedObject = collision.gameObject;
         ScorePlayer();
+        audioSource.Play();
         UpdateUI();
         gameLogicManager.CallBallDestroyEvent();
     }
@@ -44,6 +46,7 @@ public class Scorer : MonoBehaviour {
 
     private void SetInitialReferences()
     {
+        audioSource = GetComponent<AudioSource>();
         gameLogicManager = GameObject.FindGameObjectWithTag("GameLogicManager").GetComponent<GameLogicManager>();
         score = 0;
         UpdateUI();

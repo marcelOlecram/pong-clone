@@ -12,6 +12,8 @@ public class BallSpawner : MonoBehaviour {
     // private
     [SerializeField]
     private GameObject currentBall;
+    [SerializeField]
+    private EnemyAI enemy;
     private float forceIncrement = 0.1f;    
     private GameLogicManager gameLogicManager;
     #endregion
@@ -48,7 +50,7 @@ public class BallSpawner : MonoBehaviour {
         currentBall = Instantiate(ballPrefab, this.transform.position, Quaternion.identity);
         currentBall.GetComponent<Ball>().SetForceAndDirection(spawnForce, spawnDirection);
         spawnForce += forceIncrement;
-
+        enemy.SetBallInGame(currentBall.transform);
         gameLogicManager.SetBallInGame(currentBall);
     }
 

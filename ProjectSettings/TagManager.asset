@@ -7,6 +7,7 @@ TagManager:
   - Ball
   - GameManager
   - GameLogicManager
+  - ScoreWall
   layers:
   - Default
   - TransparentFX

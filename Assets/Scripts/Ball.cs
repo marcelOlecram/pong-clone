@@ -8,14 +8,25 @@ public class Ball : MonoBehaviour {
     // public
     public float _forceMagnitude = 5f;
     // private
+    [SerializeField]
+    private string wallTag;
     private Vector2 _direction;
     private Rigidbody2D _rigidbody;
+    private AudioSource audioSource;
     #endregion
 
     #region UnityMethods
     private void OnEnable()
     {
         SetInitialReferences();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag(wallTag))
+        {
+            audioSource.Play();
+        }
     }
     #endregion
 
@@ -28,7 +39,8 @@ public class Ball : MonoBehaviour {
 
     private void SetInitialReferences()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();       
+        _rigidbody = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void SetForceAndDirection(float forceMagnitude, Vector2 direction)
